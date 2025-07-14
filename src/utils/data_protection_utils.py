@@ -14,7 +14,6 @@
 import hashlib
 import json
 import os
-import pickle
 import re
 import string
 
@@ -26,6 +25,7 @@ from transformers import (AutoModelForTokenClassification, AutoTokenizer,
                           pipeline)
 
 from utils.timer import AvgCodeTimer
+import fickling
 
 
 class PII_Data_Detagger:
@@ -148,7 +148,7 @@ class PII_Data_Detagger:
     def __load_name_generator(self):
         try:
             with open(self.name_generator_model_pkl, "rb") as f:
-                self.parameters = pickle.load(f)
+                self.parameters = fickling.load(f)
         except:
             raise Exception("Name generator model loading failed")
         self.ix_to_char = self.parameters["ix_to_char"]
