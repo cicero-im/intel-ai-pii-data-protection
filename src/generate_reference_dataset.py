@@ -11,11 +11,11 @@
 # flake8: noqa = E501
 
 import argparse
-import random
 import string
 
 import numpy as np
 import pandas as pd
+import secrets
 
 
 def generate_arr(N, text_array):
@@ -28,36 +28,35 @@ def generate_arr(N, text_array):
     len_text_array = len(text_array)
 
     name = lambda: "".join(
-        random.choices(string.ascii_lowercase + "   ", k=10)
+        secrets.SystemRandom().choices(string.ascii_lowercase + "   ", k=10)
     ).title()  # Name
     phone = (
         lambda: "+"
-        + "".join(random.choices(string.digits, k=2))
+        + "".join(secrets.SystemRandom().choices(string.digits, k=2))
         + " "
-        + "".join(random.choices(string.digits, k=10))
+        + "".join(secrets.SystemRandom().choices(string.digits, k=10))
     )  # Phone
     location = lambda: "".join(
-        random.choices(string.ascii_lowercase + " ", k=20)
+        secrets.SystemRandom().choices(string.ascii_lowercase + " ", k=20)
     ).title()  # Location
     email = (
-        lambda: "".join(random.choices(string.ascii_lowercase, k=10))
+        lambda: "".join(secrets.SystemRandom().choices(string.ascii_lowercase, k=10))
         + "@"
-        + "".join(random.choices(string.ascii_lowercase + "", k=5))
+        + "".join(secrets.SystemRandom().choices(string.ascii_lowercase + "", k=5))
         + ".com"
     )  # Email
     passport = lambda: "".join(
-        random.choices(string.ascii_uppercase + string.digits, k=8)
+        secrets.SystemRandom().choices(string.ascii_uppercase + string.digits, k=8)
     )  # Passport
-    ipv4 = lambda: ".".join(str(random.randint(0, 255)) for _ in range(4))  # IP address
+    ipv4 = lambda: ".".join(str(secrets.SystemRandom().randint(0, 255)) for _ in range(4))  # IP address
     invoice = lambda: "".join(
-        random.choices(
-            string.ascii_uppercase + string.digits + string.ascii_lowercase, k=15
+        secrets.SystemRandom().choices(string.ascii_uppercase + string.digits + string.ascii_lowercase, k=15
         )
     )  # Invoice
-    credit_card = lambda: random.randint(10**16 - 1, 10**17 - 1)  # Credit Card
-    ssn = lambda: random.randint(10**9 - 1, 10**10 - 1)  # Social Security
+    credit_card = lambda: secrets.SystemRandom().randint(10**16 - 1, 10**17 - 1)  # Credit Card
+    ssn = lambda: secrets.SystemRandom().randint(10**9 - 1, 10**10 - 1)  # Social Security
     text = lambda: text_array[
-        random.randint(0, len_text_array - 1)
+        secrets.SystemRandom().randint(0, len_text_array - 1)
     ]  # Text data from available sources
 
     arr = [

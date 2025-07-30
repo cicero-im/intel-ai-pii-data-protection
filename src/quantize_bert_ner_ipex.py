@@ -13,8 +13,8 @@
 
 import argparse
 import pathlib
-import random
 import warnings
+import secrets
 
 warnings.filterwarnings("ignore")
 import intel_extension_for_pytorch as ipex
@@ -34,7 +34,7 @@ def main(flags):
     model.eval()
 
     sample_inputs = [
-        random.sample(range(tokenizer.vocab_size), model.config.max_position_embeddings)
+        secrets.SystemRandom().sample(range(tokenizer.vocab_size), model.config.max_position_embeddings)
     ]
     sample_inputs = tokenizer.batch_decode(sample_inputs)
     sample_inputs = tokenizer(
